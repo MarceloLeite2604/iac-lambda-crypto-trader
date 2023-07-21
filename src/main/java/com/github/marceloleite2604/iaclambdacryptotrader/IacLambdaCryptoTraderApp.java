@@ -8,7 +8,7 @@ public class IacLambdaCryptoTraderApp {
   public static void main(final String[] args) {
     App app = new App();
 
-    new IacLambdaCryptoTraderStack(app, "LambdaCryptoTraderStack", StackProps.builder()
+    new IacLambdaCryptoTraderStack(app, "lambda-crypto-trader-stack", StackProps.builder()
       .env(Environment.builder()
         .account("428099217226")
         .region("sa-east-1")
