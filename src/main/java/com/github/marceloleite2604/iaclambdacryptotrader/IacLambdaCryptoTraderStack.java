@@ -28,7 +28,7 @@ public class IacLambdaCryptoTraderStack extends Stack {
 
     final var codeStarConnectionsSourceAction = CodeStarConnectionsSourceAction.Builder.create()
       .actionName("retrieve-source-from-github")
-      .owner("marceloleite2604")
+      .owner("MarceloLeite2604")
       .repo(Constants.GITHUB_REPO_NAME)
       .branch("main")
       .connectionArn("arn:aws:codestar-connections:sa-east-1:428099217226:connection/f808a8c2-a768-41ea-ac45-6d00bf8a0e99")
