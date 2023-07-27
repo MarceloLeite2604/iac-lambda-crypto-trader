@@ -4,7 +4,7 @@ import com.github.marceloleite2604.iaclambdacryptotrader.pipeline.PipelineCreato
 import com.github.marceloleite2604.iaclambdacryptotrader.pipeline.stage.SourceStageCreator;
 import com.github.marceloleite2604.iaclambdacryptotrader.pipeline.stage.codebuild.CodeBuildProjectCreator;
 import com.github.marceloleite2604.iaclambdacryptotrader.pipeline.stage.codebuild.CodeBuildRoleCreator;
-import com.github.marceloleite2604.iaclambdacryptotrader.pipeline.stage.codebuild.CodeBuildStageCreator;
+import com.github.marceloleite2604.iaclambdacryptotrader.pipeline.stage.codebuild.BuildStageCreator;
 import com.github.marceloleite2604.iaclambdacryptotrader.pipeline.stage.codebuild.statement.*;
 import software.amazon.awscdk.App;
 import software.amazon.awscdk.Environment;
@@ -46,7 +46,7 @@ public class IacLambdaCryptoTraderApp {
       .codeBuildRoleCreator(codeBuildRoleCreator)
       .build();
 
-    final var codeBuildStageCreator = CodeBuildStageCreator.builder()
+    final var codeBuildStageCreator = BuildStageCreator.builder()
       .codeBuildProjectCreator(codeBuildProjectCreator)
       .build();
 
@@ -79,7 +79,7 @@ public class IacLambdaCryptoTraderApp {
       .env(environment)
       .build();
 
-    lambdaCryptoTraderStackCreator.create(app, "lambda-crypto-trader-stack", stackProps);
+    lambdaCryptoTraderStackCreator.create(app, Constants.ProjectName.CAMEL_CASE + "Stack", stackProps);
 
     app.synth();
   }

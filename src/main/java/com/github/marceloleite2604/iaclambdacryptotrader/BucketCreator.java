@@ -2,7 +2,6 @@ package com.github.marceloleite2604.iaclambdacryptotrader;
 
 
 import org.jetbrains.annotations.NotNull;
-import software.amazon.awscdk.Stack;
 import software.amazon.awscdk.services.iam.Effect;
 import software.amazon.awscdk.services.iam.PolicyStatement;
 import software.amazon.awscdk.services.iam.StarPrincipal;

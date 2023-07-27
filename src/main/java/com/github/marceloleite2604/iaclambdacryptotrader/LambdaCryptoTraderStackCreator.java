@@ -23,7 +23,7 @@ public class LambdaCryptoTraderStackCreator {
 
     final var stack = new Stack(scope, id, props);
 
-    final var sourceArtifact = new Artifact("lambda-crypto-trader-source");
+    final var sourceArtifact = new Artifact(Constants.ProjectName.CAMEL_CASE + "SourceArtifact");
 
     var context = Context.builder()
       .stack(stack)
@@ -32,6 +32,6 @@ public class LambdaCryptoTraderStackCreator {
 
     context = bucketCreator.create(context);
 
-    pipelineCreator.create(context);
+    context = pipelineCreator.create(context);
   }
 }

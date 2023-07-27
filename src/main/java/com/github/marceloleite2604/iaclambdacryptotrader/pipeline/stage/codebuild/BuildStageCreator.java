@@ -13,7 +13,7 @@ import java.util.List;
 
 @Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class CodeBuildStageCreator implements StageCreator {
+public class BuildStageCreator implements StageCreator {
 
   private static final int STAGE_ORDER = 2;
 
@@ -24,7 +24,7 @@ public class CodeBuildStageCreator implements StageCreator {
     final var project = codeBuildProjectCreator.create(context);
 
     final var codeBuildAction = CodeBuildAction.Builder.create()
-      .actionName("build-project")
+      .actionName("BuildAndDeploy")
       .type(CodeBuildActionType.BUILD)
       .project(project)
       .input(context.getSourceArtifact())
@@ -32,7 +32,7 @@ public class CodeBuildStageCreator implements StageCreator {
       .build();
 
     return StageProps.builder()
-      .stageName("build")
+      .stageName("Build")
       .actions(List.of(codeBuildAction))
       .build();
   }

@@ -25,10 +25,10 @@ public class CodeBuildRoleCreator {
     final var managedPolicy = createManagedPolicy(stack);
 
     final var servicePrincipal = new ServicePrincipal("codebuild.amazonaws.com");
-    
+
     return Role.Builder.create(stack, "CodeBuildRole")
-      .roleName(Constants.PROJECT_NAME + "-code-build-role")
-      .description("Crypto Trader Code Builder role")
+      .roleName(Constants.ProjectName.CAMEL_CASE + "CodeBuildRole")
+      .description(Constants.ProjectName.SPACED + " Code Builder role")
       .managedPolicies(List.of(managedPolicy))
       .assumedBy(servicePrincipal)
       .build();
@@ -41,8 +41,8 @@ public class CodeBuildRoleCreator {
       .map(creator -> creator.create(stack))
       .toList();
 
-    return ManagedPolicy.Builder.create(stack, "CodeBuildSamLambdaPolicy")
-      .managedPolicyName("CodeBuildSamCryptoTrader")
+    return ManagedPolicy.Builder.create(stack, "ManagedPolicy")
+      .managedPolicyName("CodeBuild" + Constants.ProjectName.CAMEL_CASE)
       .statements(statements)
       .build();
   }

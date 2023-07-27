@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import software.amazon.awscdk.Stack;
 import software.amazon.awscdk.services.codepipeline.Artifact;
+import software.amazon.awscdk.services.codepipeline.Pipeline;
 import software.amazon.awscdk.services.s3.Bucket;
 
 @Builder(toBuilder = true)
@@ -18,4 +19,6 @@ public class Context {
   private final Bucket bucket;
 
   private final Artifact sourceArtifact;
+
+  private final Pipeline pipeline;
 }

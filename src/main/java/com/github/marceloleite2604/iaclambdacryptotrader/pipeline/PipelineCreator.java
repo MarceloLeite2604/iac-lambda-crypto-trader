@@ -1,5 +1,6 @@
 package com.github.marceloleite2604.iaclambdacryptotrader.pipeline;
 
+import com.github.marceloleite2604.iaclambdacryptotrader.Constants;
 import com.github.marceloleite2604.iaclambdacryptotrader.Context;
 import com.github.marceloleite2604.iaclambdacryptotrader.pipeline.stage.StageCreator;
 import lombok.AccessLevel;
@@ -16,16 +17,19 @@ public class PipelineCreator {
 
   private final List<StageCreator> stageCreators;
 
-  public Pipeline create(Context context) {
+  public Context create(Context context) {
 
     final var stages = createStages(context);
 
-    return Pipeline.Builder.create(context.getStack(), "Pipeline")
-      // TODO Replace by camel case.
-      .pipelineName("lambda-crypto-trader")
+    final var pipeline = Pipeline.Builder.create(context.getStack(), "Pipeline")
+      .pipelineName(Constants.ProjectName.CAMEL_CASE)
       .artifactBucket(context.getBucket())
       .restartExecutionOnUpdate(true)
       .stages(stages)
+      .build();
+
+    return context.toBuilder()
+      .pipeline(pipeline)
       .build();
   }
 
