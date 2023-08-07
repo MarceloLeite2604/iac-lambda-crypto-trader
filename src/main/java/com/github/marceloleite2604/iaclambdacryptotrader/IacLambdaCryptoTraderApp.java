@@ -29,6 +29,8 @@ public class IacLambdaCryptoTraderApp {
 
     final var manageLambdaFunctionsPolicyStatementCreator = new ManageLambdaFunctionsPolicyStatementCreator();
 
+    final var manageEventsPolicyStatementCreator = new ManageEventsPolicyStatementCreator();
+
     final var policyStatementCreators = List.of(
       readSsmParametersPolicyStatementCreator,
       manageCloudFormationSamStackPolicyStatementCreator,
@@ -36,7 +38,8 @@ public class IacLambdaCryptoTraderApp {
       manageApplicationsPolicyStatementCreator,
       manageDeploymentGroupsPolicyStatementCreator,
       manageCloudFormationStackPolicyStatementCreator,
-      manageLambdaFunctionsPolicyStatementCreator);
+      manageLambdaFunctionsPolicyStatementCreator,
+      manageEventsPolicyStatementCreator);
 
     final var codeBuildRoleCreator = CodeBuildRoleCreator.builder()
       .policyStatementCreators(policyStatementCreators)
@@ -75,11 +78,7 @@ public class IacLambdaCryptoTraderApp {
       .region("sa-east-1")
       .build();
 
-    final var stackProps = StackProps.builder()
-      .env(environment)
-      .build();
-
-    lambdaCryptoTraderStackCreator.create(app, Constants.ProjectName.CAMEL_CASE + "Stack", stackProps);
+    lambdaCryptoTraderStackCreator.create(app, Constants.ProjectName.CAMEL_CASE + "PipelineStack", environment);
 
     app.synth();
   }

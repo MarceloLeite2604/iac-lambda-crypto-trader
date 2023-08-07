@@ -1,5 +1,6 @@
 package com.github.marceloleite2604.iaclambdacryptotrader.pipeline.stage.codebuild.statement;
 
+import com.github.marceloleite2604.iaclambdacryptotrader.Constants;
 import software.amazon.awscdk.Stack;
 import software.amazon.awscdk.services.iam.Effect;
 import software.amazon.awscdk.services.iam.PolicyStatement;
@@ -10,7 +11,7 @@ public class ManageRolesPolicyStatementCreator implements PolicyStatementCreator
   @Override
   public PolicyStatement create(Stack stack) {
 
-    final var rolesArn = String.format("arn:aws:iam::%s:role/sam-lambda-crypto-trader-*", stack.getAccount());
+    final var rolesArn = String.format("arn:aws:iam::%s:role/%s-*", stack.getAccount(), Constants.Sam.STACK_NAME);
 
     return PolicyStatement.Builder.create()
       .sid("ManageRoles")

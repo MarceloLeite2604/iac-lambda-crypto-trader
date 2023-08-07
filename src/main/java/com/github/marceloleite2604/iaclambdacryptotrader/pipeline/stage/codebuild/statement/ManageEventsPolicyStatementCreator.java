@@ -7,28 +7,23 @@ import software.amazon.awscdk.services.iam.PolicyStatement;
 
 import java.util.List;
 
-public class ManageLambdaFunctionsPolicyStatementCreator implements PolicyStatementCreator {
+public class ManageEventsPolicyStatementCreator implements PolicyStatementCreator {
   @Override
   public PolicyStatement create(Stack stack) {
-    final var functionsArn = String.format("arn:aws:lambda:%s:%s:function:%s-*",
+    final var functionsArn = String.format("arn:aws:events:%s:%s:rule/%s-*",
       stack.getRegion(),
       stack.getAccount(),
       Constants.Sam.STACK_NAME);
 
     return PolicyStatement.Builder.create()
-      .sid("ManageFunctions")
+      .sid("ManageEvents")
       .effect(Effect.ALLOW)
       .actions(List.of(
-        "lambda:CreateFunction",
-        "lambda:DeleteFunction",
-        "lambda:TagResource",
-        "lambda:GetFunction",
-        "lambda:ListVersionsByFunction",
-        "lambda:PublishVersion",
-        "lambda:CreateAlias",
-        "lambda:DeleteAlias",
-        "lambda:AddPermission",
-        "lambda:RemovePermission"))
+        "events:PutRule",
+        "events:DescribeRule",
+        "events:DeleteRule",
+        "events:RemoveTargets",
+        "events:PutTargets"))
       .resources(List.of(functionsArn))
       .build();
   }
